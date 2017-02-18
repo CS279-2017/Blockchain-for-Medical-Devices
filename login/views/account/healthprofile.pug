@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+  .page-header.center-block
+    a.button.btn.btn-primary(href='/') Back to Home
+    h3 Health Profile
+
+  form.form-horizontal(action='/account/healthprofile', method='POST')
+    p Please list your information:
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group
+      label.col-sm-3.control-label(for='allergy') Allergies
+      .col-sm-7
+        input.form-control(type='text', name='allergy', id='allergy', value=user.healthprofile.allergy)
+    .form-group
+      label.col-sm-3.control-label(for='medication') Medications
+      .col-sm-7
+        input.form-control(type='text', name='medication', id='medication', value=user.healthprofile.medication)
+    .form-group
+      label.col-sm-3.control-label(for='illness') Current Illnesses
+      .col-sm-7
+        input.form-control(type='text', name='illness', id='illness', value=user.healthprofile.illness)
+    .form-group
+      label.col-sm-3.control-label(for='pastIllness') Past Illnesses
+      .col-sm-7
+        input.form-control(type='text', name='pastIllness', id='pastIllness', value=user.healthprofile.pastIllness)
+    .form-group
+      label.col-sm-3.control-label(for='familyHistory') Family History
+      .col-sm-7
+        input.form-control(type='text', name='familyHistory', id='familyHistory', value=user.healthprofile.familyHistory)
+    .form-group
+      .col-sm-offset-3.col-sm-4
+        button.btn.btn.btn-primary(type='submit')
+          i.fa.fa-pencil
+          | Update Health Profile
