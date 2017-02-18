@@ -1,0 +1,25 @@
+User stories as of 1/23/2017
+Please update the file to select the two stories you will mock up for 1/30.
+Just add your name in parens before the story
+
+
+- As a provider, I want to be able to log in to view a list of my patients.
+- As a patient, I want to be able to choose who can see my information.
+- As a patient, I want my medical history to be secure and un-alterable.
+- (Raymond) As a provider, I want to be able to view medical trends for a specific patient.
+- (Raymond) As a patient, I want to be able to report symptoms to my provider.
+- (Wendy) As a provider, I want to be able to provide proof of service (i.e. medication, exams, etc.)
+- As a provider (hospital), I want to maintain HIPAA compliance and keep data secure.
+- (Wendy) As a provider, I want to be able to authorize prescriptions via the blockchain.
+- As a pharmacist, I want to confirm delivery of prescriptions on the blockchain.
+- As a pharmacist, I want to be able to check authorization of prescriptions and receipt of renewals.
+- (Dillon) As a patient, I want to be able to submit an insurance claim.
+- As an insurance provider, I want to be able to view services rendered.
+- As a patient, I want transparency in the way that my medical records are handled.
+- As a patient, I want to be able to report symptoms from my phone.
+- As a patient, I want to be able to use external medical devices (blood pressure cuffs, fitbits, etc.) to post data.
+- As a user, I want to be able to access records both on the web and on a mobile device.
+- (Dillon) As a patient, I want to be able to set up my medical profile easily (height, weight, etc)
+- (Zach) As a patient or provider, I want to be able to (request to) add family member data to my profile
+- As a patient/provider, I want to be able to comply with HIPAA when requesting medical data within families.
+- (Zach) As a provider, I want to be able to graph/filter info based on time and speciality (i.e. cardiology vs orthopedics)

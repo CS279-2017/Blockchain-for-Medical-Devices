@@ -1,0 +1,24 @@
+This is a rough draft of the plan for this semester, organized into 2 week Agile development cycles
+Feel free to add or update different parts of the plan as needed.
+
+SETUP: Learn basics of Ethereum, Go language, setup environments
+
+1) Basic web interface to interact with application
+ - writing data to the blockchain
+ - reading data back from blockchain
+2) Develop method for encrypting/decrypting the data to be written to blockchain (Two cycles)
+ - Explore using smart contracts to find patient data in blockchain
+ - Define data payload to write to the blockchain
+ - Explore different encryption methods (multiple public/private keypairs, ...)
+ - Encrypt/decrypt data locally
+ - Write encrypted data to blockchain, then read data from blockchain and decrypt
+ - Examine final process for potential security vulnerabilities, may want to search for external assistance
+3) Additional work on web interface
+ - Make the UI visually pleasing
+ - Add basic reporting
+ - Possible chart views of patient data
+ - Possible alert system (this could be deferred to align with building a mobile app)
+ - May not be feasible to quickly read all data from chart, may look to implement bigchainDB at this point to facilitate faster data queries/reports
+4) Build mobile app
+ - First priority, for patients to write data to the blockchain
+ - Lower priority, for doctors to view the data (since they should have access to web client for viewing detailed reports)
