@@ -1,4 +1,4 @@
-# healthcareBlockchain
+# Blockchain Technology for Medical Uses
 Spring 2017 Blockchain Healthcare application
 
 Zach Barton, Wendy Yu, Dillon Rolnick, Raymond Carter
