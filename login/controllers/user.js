@@ -34,8 +34,7 @@ exports.postUpdateHealthProfile = (req, res, next) => {
     user.healthprofile.allergy = req.body.allergy || '';
     user.healthprofile.medication = req.body.medication || '';
     user.healthprofile.illness = req.body.illness || '';
-    user.healthprofile.pastIllness = req.body.pastIllness || '';
-    user.healthprofile.familiyHistory = req.body.familyHistory || '';
+    //add family and history stuff here
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -91,7 +90,6 @@ exports.postPrescription = (req, res, next) => {
 exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect('/');
-    //return res.redirect('/loggedin');
   }
   res.render('account/login', {
     title: 'Login'
@@ -123,8 +121,8 @@ exports.postLogin = (req, res, next) => {
     req.logIn(user, (err) => {
       if (err) { return next(err); }
       req.flash('success', { msg: 'Success! You are logged in.' });
-      res.redirect(req.session.returnTo || '/');
-      //res.redirect('/loggedin');
+     // res.redirect(req.session.returnTo || '/');
+      res.redirect('/');
     });
   })(req, res, next);
 };
@@ -223,6 +221,15 @@ exports.postUpdateProfile = (req, res, next) => {
     user.profile.gender = req.body.gender || '';
     user.profile.location = req.body.location || '';
     user.profile.website = req.body.website || '';
+    user.profile.address = req.body.address || '';
+    user.profile.city = req.body.city || '';
+    user.profile.state = req.body.state || '';
+    user.profile.zip = req.body.zip || '';
+    user.profile.phone = req.body.phone || '';
+    user.profile.dob = req.body.dob || '';
+    user.profile.ssn = req.body.ssn || '';
+    user.profile.primary = req.body.primary || '';
+
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {

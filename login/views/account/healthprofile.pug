@@ -3,7 +3,7 @@ extends ../layout
 block content
   .page-header.center-block
     a.button.btn.btn-primary(href='/') Back to Home
-    h3 Health Profile
+    h2 Health Profile
 
   form.form-horizontal(action='/account/healthprofile', method='POST')
     p Please list your information:
@@ -20,14 +20,171 @@ block content
       label.col-sm-3.control-label(for='illness') Current Illnesses
       .col-sm-7
         input.form-control(type='text', name='illness', id='illness', value=user.healthprofile.illness)
+    .page-header
+    p Medical History (check all that apply):
     .form-group
-      label.col-sm-3.control-label(for='pastIllness') Past Illnesses
-      .col-sm-7
-        input.form-control(type='text', name='pastIllness', id='pastIllness', value=user.healthprofile.pastIllness)
+      label.col-sm-3.control-label 
+      .col-sm-8
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.hives=='hives', name='hives', value='hives', data-toggle='checkbox')
+          span Hives
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.bowel=='bowel', name='bowel', value='bowel', data-toggle='checkbox')
+          span Bowel Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.liver=='liver', name='liver', value='liver', data-toggle='checkbox')
+          span Liver Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.thyroid=='thyroid', name='thyroid', value='thyroid', data-toggle='checkbox')
+          span Thyroid
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.diabetes=='diabetes', name='diabetes', value='diabetes', data-toggle='checkbox')
+          span Diabetes
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.stomach=='stomach', name='stomach', value='stomach', data-toggle='checkbox')
+          span Stomach Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.pneumonia=='pneumonia', name='pneumonia', value='pneumonia', data-toggle='checkbox')
+          span Pneumonia
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.acid=='acid', name='acid', value='acid', data-toggle='checkbox')
+          span Acid Reflux
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.tb=='tb', name='tb', value='tb', data-toggle='checkbox')
+          span Tuberculosis
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.anemia=='anemia', name='anemia', value='anemia', data-toggle='checkbox')
+          span Anemia
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.stroke=='stroke', name='stroke', value='stroke', data-toggle='checkbox')
+          span Strokes
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.bronchitis=='bronchitis', name='bronchitis', value='bronchitis', data-toggle='checkbox')
+          span Bronchitis
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.bleeding=='bleeding', name='bleeding', value='bleeding', data-toggle='checkbox')
+          span Bleeding Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.emphysema=='emphysema', name='emphysema', value='emphysema', data-toggle='checkbox')
+          span Emphysema
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.cancer=='cancer', name='cancer', value='cancer', data-toggle='checkbox')
+          span Cancer
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.lung=='lung', name='lung', value='lung', data-toggle='checkbox')
+          span Lung Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.neuro=='stroke', name='neuro', value='neuro', data-toggle='checkbox')
+          span Neuro Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.strep=='strep', name='strep', value='strep', data-toggle='checkbox')
+          span Strep Throat
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.seizures=='seizures', name='seizures', value='seizures', data-toggle='checkbox')
+          span Seizures/Epilepsy
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.sleep=='sleep', name='sleep', value='sleep', data-toggle='checkbox')
+          span Sleep Apnea
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.headaches=='headaches', name='headaches', value='headaches', data-toggle='checkbox')
+          span Migranes
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.cpap=='cpap', name='cpap', value='cpap', data-toggle='checkbox')
+          span CPAP
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.cataracts=='cataracts', name='cataracts', value='cataracts', data-toggle='checkbox')
+          span Cataracts
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.arrhythmia=='arrhythmia', name='arrhythmia', value='arrhythmia', data-toggle='checkbox')
+          span Heart Arrhythmia
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.glaucoma=='glaucoma', name='glaucoma', value='glaucoma', data-toggle='checkbox')
+          span Glaucoma
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.heart=='heart', name='heart', value='heart', data-toggle='checkbox')
+          span Heart Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.arthritis=='arthritis', name='arthritis', value='arthritis', data-toggle='checkbox')
+          span Arthritis
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.bp=='bp', name='bp', value='bp', data-toggle='checkbox')
+          span Low/High BP
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.spine=='spine', name='spine', value='spine', data-toggle='checkbox')
+          span Spine Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.cholesterol=='cholesterol', name='cholesterol', value='cholesterol', data-toggle='checkbox')
+          span High Cholesterol
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.osteoporosis=='osteoporosis', name='osteoporosis', value='osteoporosis', data-toggle='checkbox')
+          span Osteoporosis
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.hepatitis=='hepatitis', name='hepatitis', value='hepatitis', data-toggle='checkbox')
+          span Hepatitis
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.depression=='depression', name='depression', value='depression', data-toggle='checkbox')
+          span Depression
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.hiv=='hiv', name='hiv', value='hiv', data-toggle='checkbox')
+          span HIV/AIDS
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.anxiety=='anxiety', name='anxiety', value='anxiety', data-toggle='checkbox')
+          span Anxiety Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.kidney=='kidney', name='kidney', value='kidney', data-toggle='checkbox')
+          span Kidney Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.psych=='psych', name='psych', value='psych', data-toggle='checkbox')
+          span Psychological Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.gyn=='gyn', name='gyn', value='gyn', data-toggle='checkbox')
+          span Gynecology Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.prostate=='prostate', name='prostate', value='prostate', data-toggle='checkbox')
+          span Prostate Issues
+        label.checkbox.col-sm-3
+          input(type='checkbox', checked=user.history.drugs=='drugs', name='drugs', value='drugs', data-toggle='checkbox')
+          span Alcohol/Drugs
+    .page-header
+    p Please describe your family history (leave blank if not applicable):
+    input(type='hidden', name='_csrf', value=_csrf)
     .form-group
-      label.col-sm-3.control-label(for='familyHistory') Family History
+      label.col-sm-3.control-label(for='asthma') Asthma
       .col-sm-7
-        input.form-control(type='text', name='familyHistory', id='familyHistory', value=user.healthprofile.familyHistory)
+        input.form-control(type='text', name='asthma', id='asthma', value=user.family.asthma)
+    .form-group
+      label.col-sm-3.control-label(for='sinus') Sinus Issues
+      .col-sm-7
+        input.form-control(type='text', name='sinus', id='sinus', value=user.family.sinus)
+    .form-group
+      label.col-sm-3.control-label(for='hayfever') Hay Fever
+      .col-sm-7
+        input.form-control(type='text', name='hayfever', id='hayfever', value=user.family.hayfever)
+    .form-group
+      label.col-sm-3.control-label(for='cysticfibrosis') Cystic Fibrosis
+      .col-sm-7
+        input.form-control(type='text', name='cysticfibrosis', id='cysticfibrosis', value=user.family.cysticfibrosis)
+    .form-group
+      label.col-sm-3.control-label(for='emphysema') Emphysema
+      .col-sm-7
+        input.form-control(type='text', name='emphysema', id='emphysema', value=user.family.emphysema)
+    .form-group
+      label.col-sm-3.control-label(for='thyroid') Thyroid Issues
+      .col-sm-7
+        input.form-control(type='text', name='thyroid', id='thyroid', value=user.family.thyroid)
+    .form-group
+      label.col-sm-3.control-label(for='heart') Heart Disease
+      .col-sm-7
+        input.form-control(type='text', name='heart', id='heart', value=user.family.heart)
+    .form-group
+      label.col-sm-3.control-label(for='diabetes') Diabetes
+      .col-sm-7
+        input.form-control(type='text', name='diabetes', id='diabetes', value=user.family.diabetes)
+    .form-group
+      label.col-sm-3.control-label(for='cancer') Cancer
+      .col-sm-7
+        input.form-control(type='text', name='cancer', id='cancer', value=user.family.cancer)
+
     .form-group
       .col-sm-offset-3.col-sm-4
         button.btn.btn.btn-primary(type='submit')

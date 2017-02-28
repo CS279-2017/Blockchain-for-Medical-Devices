@@ -2,6 +2,7 @@ extends ../layout
 
 block content
   .page-header.center-block
+    a.button.btn.btn-primary(href='/') Back to Home
     h3 Profile Information
 
   form.form-horizontal(action='/account/profile', method='POST')
@@ -14,6 +15,50 @@ block content
       label.col-sm-3.control-label(for='name') Name
       .col-sm-7
         input.form-control(type='text', name='name', id='name', value=user.profile.name)
+    .form-group
+      label.col-sm-3.control-label Gender
+      .col-sm-6
+        label.radio.col-sm-3
+          input(type='radio', checked=user.profile.gender=='male', name='gender', value='male', data-toggle='radio')
+          span Male
+        label.radio.col-sm-3
+          input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
+          span Female
+        label.radio.col-sm-3
+          input(type='radio', checked=user.profile.gender=='other', name='gender', value='other', data-toggle='radio')
+          span Other
+    .form-group
+      label.col-sm-3.control-label(for='address') Address
+      .col-sm-7
+        input.form-control(type='text', name='address', id='address', value=user.profile.address)
+    .form-group
+      label.col-sm-3.control-label(for='city') City
+      .col-sm-7
+        input.form-control(type='text', name='city', id='city', value=user.profile.city)
+    .form-group
+      label.col-sm-3.control-label(for='state') State
+      .col-sm-7
+        input.form-control(type='text', name='state', id='state', value=user.profile.state)
+    .form-group
+      label.col-sm-3.control-label(for='zip') Zipcode
+      .col-sm-7
+        input.form-control(type='text', name='zip', id='zip', value=user.profile.zip)
+    .form-group
+      label.col-sm-3.control-label(for='phone') Phone
+      .col-sm-7
+        input.form-control(type='text', name='phone', id='phone', value=user.profile.phone)
+    .form-group
+      label.col-sm-3.control-label(for='dob') Date of Birth
+      .col-sm-7
+        input.form-control(type='text', name='dob', id='dob', value=user.profile.dob)
+    .form-group
+      label.col-sm-3.control-label(for='ssn') Social Security Number
+      .col-sm-7
+        input.form-control(type='password', name='ssn', id='ssn', value=user.profile.ssn)
+    .form-group
+      label.col-sm-3.control-label(for='primary') Primary Physician
+      .col-sm-7
+        input.form-control(type='text', name='primary', id='primary', value=user.profile.primary)
     .form-group
       .col-sm-offset-3.col-sm-4
         button.btn.btn.btn-primary(type='submit')

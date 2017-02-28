@@ -3,7 +3,7 @@ extends ../layout
 block content
   .page-header.center-block
     a.button.btn.btn-primary(href='/') Back to Home
-    h3 Health Profile
+    h3 Request Prescription
 
   form.form-horizontal(action='/account/prescription', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
