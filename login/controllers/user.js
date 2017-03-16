@@ -5,12 +5,75 @@ const passport = require('passport');
 const User = require('../models/User');
 
 /**
+ * GET /fill_prescription
+ * fill prescription page.
+ */
+exports.getFillPrescription = (req, res) => {
+  res.render('account/fill_prescription', {
+    title: 'Fill Prescription'
+  });
+};
+
+/**
+ * GET /view_symptoms
+ * view patient symptoms page.
+ */
+exports.getViewSymptoms = (req, res) => {
+  res.render('account/view_symptoms', {
+    title: 'View Patient Symptoms'
+  });
+};
+
+/**
+ * GET /view_patient_records
+ * report page.
+ */
+exports.getViewPatientRecords = (req, res) => {
+  res.render('account/view_patient_records', {
+    title: 'View Patient Records'
+  });
+};
+
+/**
  * GET /report
  * report page.
  */
 exports.getReport = (req, res) => {
   res.render('account/report', {
     title: 'Report'
+  });
+};
+
+/**
+ * GET /symptoms
+ * report page.
+ */
+exports.getSymptoms = (req, res) => {
+  res.render('account/symptoms', {
+    title: 'Report Symptoms'
+  });
+};
+
+/**
+ * POST /account/symptoms
+ * symptoms information.
+ */
+exports.postSymptoms = (req, res, next) => {
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.symptoms.doctor = req.body.doctor || '';
+    user.symptoms.description = req.body.description || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was something wrong with the information you entered.' });
+          return res.redirect('/symptoms');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Your symptoms have been received.' });
+      res.redirect('/symptoms');
+    });
   });
 };
 
@@ -34,6 +97,57 @@ exports.postUpdateHealthProfile = (req, res, next) => {
     user.healthprofile.allergy = req.body.allergy || '';
     user.healthprofile.medication = req.body.medication || '';
     user.healthprofile.illness = req.body.illness || '';
+
+    user.history.hives = req.body.hives || ''; 
+    user.history.bowel = req.body.bowel || '';
+    user.history.thyroid = req.body.thyroid || ''; 
+    user.history.liver = req.body.liver || '';
+    user.history.diabetes = req.body.diabetes || ''; 
+    user.history.stomach = req.body.stomach || '';
+    user.history.pneumonia = req.body.pneumonia || ''; 
+    user.history.acid = req.body.acid || '';
+    user.history.tb = req.body.tb || ''; 
+    user.history.anemia = req.body.anemia || '';
+    user.history.stroke = req.body.stroke || '';
+    user.history.bronchitis = req.body.bronchitis || ''; 
+    user.history.bleeding = req.body.bleeding || '';
+    user.history.emphysema = req.body.emphysema || ''; 
+    user.history.cancer = req.body.cancer || '';
+    user.history.lung = req.body.lung || ''; 
+    user.history.neuro = req.body.neuro || '';
+    user.history.strep = req.body.strep || ''; 
+    user.history.seizures = req.body.seizures || '';
+    user.history.sleep = req.body.sleep || ''; 
+    user.history.headaches = req.body.headaches || '';
+    user.history.cpap = req.body.cpap || ''; 
+    user.history.cataracts = req.body.cataracts || '';
+    user.history.arrhythmia = req.body.arrhythmia || ''; 
+    user.history.glaucoma = req.body.glaucoma || '';
+    user.history.heart = req.body.heart || ''; 
+    user.history.arthritis = req.body.arthritis || '';
+    user.history.bp = req.body.bp || ''; 
+    user.history.spine = req.body.spine || '';
+    user.history.cholesterol = req.body.cholesterol || ''; 
+    user.history.osteoporosis = req.body.osteoporosis || '';
+    user.history.hepatitis = req.body.hepatitis || ''; 
+    user.history.depression = req.body.depression || '';
+    user.history.hiv = req.body.hiv || ''; 
+    user.history.anxiety = req.body.anxiety || '';
+    user.history.kidney = req.body.kidney || ''; 
+    user.history.psych = req.body.psych || '';
+    user.history.gyn = req.body.gyn || ''; 
+    user.history.prostate = req.body.prostate || '';
+    user.history.drugs = req.body.drugs || '';
+
+    user.family.asthma = req.body.asthma || '';
+    user.family.sinus = req.body.sinus || '';
+    user.family.hayfever = req.body.hayfever || '';
+    user.family.cysticfibrosis = req.body.cysticfibrosis || '';
+    user.family.emphysema = req.body.emphysema || '';
+    user.family.thyroid = req.body.thyroid || '';
+    user.family.heart = req.body.heart || '';
+    user.family.diabetes = req.body.diabetes || '';
+    user.family.cancer = req.body.cancer || '';
     //add family and history stuff here
     user.save((err) => {
       if (err) {
@@ -168,7 +282,9 @@ exports.postSignup = (req, res, next) => {
 
   const user = new User({
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    patient: req.body.status,
+    name: req.body.name
   });
 
   User.findOne({ email: req.body.email }, (err, existingUser) => {
@@ -217,7 +333,7 @@ exports.postUpdateProfile = (req, res, next) => {
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
     user.email = req.body.email || '';
-    user.profile.name = req.body.name || '';
+    user.name = req.body.name || '';
     user.profile.gender = req.body.gender || '';
     user.profile.location = req.body.location || '';
     user.profile.website = req.body.website || '';
@@ -229,6 +345,8 @@ exports.postUpdateProfile = (req, res, next) => {
     user.profile.dob = req.body.dob || '';
     user.profile.ssn = req.body.ssn || '';
     user.profile.primary = req.body.primary || '';
+    user.doctor_profile.hospital = req.body.hospital || '';
+    user.doctor_profile.phone = req.body.phone || '';
 
     user.save((err) => {
       if (err) {

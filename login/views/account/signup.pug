@@ -6,6 +6,10 @@ block content
   form.form-horizontal(id='signup-form', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group
+      label.col-sm-3.control-label(for='name') Name
+      .col-sm-7
+        input.form-control(type='text', name='name', id='name', placeholder='First and Last', autofocus, required)
+    .form-group
       label.col-sm-3.control-label(for='email') Email
       .col-sm-7
         input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
@@ -17,6 +21,15 @@ block content
       label.col-sm-3.control-label(for='confirmPassword') Confirm Password
       .col-sm-7
         input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
+    .form-group
+      label.col-sm-3.control-label(for='patient') Status
+      .col-sm-6
+        label.radio.col-sm-3
+          input(type='radio', checked=patient=='true', name='status', value='true', data-toggle='radio')
+          span Patient
+        label.radio.col-sm-3
+          input(type='radio', checked=patient=='false', name='status', value='false', data-toggle='radio')
+          span Doctor
     .form-group
       .col-sm-offset-3.col-sm-7
         button.btn.btn-primary(type='submit')

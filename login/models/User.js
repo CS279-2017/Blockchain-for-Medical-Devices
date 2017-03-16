@@ -7,6 +7,9 @@ const userSchema = new mongoose.Schema({
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
+  //true if patient, false if doctor
+  patient: Boolean,
+  name: String,
 
   facebook: String,
   twitter: String,
@@ -17,8 +20,17 @@ const userSchema = new mongoose.Schema({
   steam: String,
   tokens: Array,
 
+  doctor_profile: {
+    hospital: String,
+    phone: String
+  },
+
+  doctor_prescription: {
+    filled: String
+  },
+
+////////////
   profile: {
-    name: String,
     gender: String,
     location: String,
     website: String,
@@ -97,6 +109,11 @@ const userSchema = new mongoose.Schema({
   prescription: {
     doctor: String,
     medication: String,
+    description: String
+  },
+  
+  symptoms: {
+    doctor: String,
     description: String
   }
 

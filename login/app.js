@@ -126,12 +126,25 @@ app.post('/account/profile', passportConfig.isAuthenticated, userController.post
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 
+//patient pages
+//doctor writes a report and patient can read it
 app.get('/report', userController.getReport);
+
 app.get('/healthprofile', userController.getHealthProfile);
 app.get('/prescription', userController.getPrescription);
-//app.post('/report', userController.postReport);
+app.get('/symptoms', userController.getSymptoms);
+app.post('/account/symptoms', userController.postSymptoms);
 app.post('/account/healthprofile', userController.postUpdateHealthProfile);
 app.post('/account/prescription', userController.postPrescription);
+
+//doctor pages
+app.get('/view_symptoms', userController.getViewSymptoms);
+app.get('/fill_prescription', userController.getFillPrescription);
+app.get('/view_patient_records', userController.getViewPatientRecords);
+//app.post('/account/view_symptoms', userController.postViewSymptoms);
+//app.post('/account/fill_prescription', userController.postFillPrescription);
+//app.post('/account/view_patient_records', userController.postViewPatientRecords);
+
 
 /**
  * Error Handler.

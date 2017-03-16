@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  .page-header.center-block
+    a.button.btn.btn-primary(href='/') Back to Home
+    h3 Report Symptoms
+
+  form.form-horizontal(action='/account/symptoms', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group
+      label.col-sm-3.control-label(for='doctor') Doctor
+      .col-sm-7
+        input.form-control(type='text', name='doctor', id='doctor', value=user.symptoms.doctor)
+    .form-group
+      label.col-sm-3.control-label(for='description') Current Illnesses
+      .col-sm-7
+        input.form-control(type='text', name='description', id='description', value=user.symptoms.description)
+    .form-group
+      .col-sm-offset-3.col-sm-4
+        button.btn.btn.btn-primary(type='submit')
+          i.fa.fa-pencil
+          | Report Your Symptoms

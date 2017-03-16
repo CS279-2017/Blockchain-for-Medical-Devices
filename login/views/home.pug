@@ -8,7 +8,7 @@ block content
 		h2(style='text-align:center') This website uses blockchain technology to securely transfer your health records and requests to your provider. As a patient, you can view your old medical records, update your health profile, and also request prescription refills. As a doctor, you can send prescriptions, update your patient's medical records, and also enter new medical records. 
 		br
 		h2(style='text-align:center') Please contact us for any questions or concerns.
-	else
+	else if user.patient
 		h1(style='text-align:center') What would you like to do today?
 		h2(style='text-align:center') I want to...
 		div.center-block(style='width:400px;margin-top:90px !important')
@@ -19,5 +19,15 @@ block content
 			p
 				a.button.btn.btn-primary.btn-block(href='/healthprofile') Update Health Info
 			p
-				a.button.btn.btn-primary.btn-block Report Symptoms
+				a.button.btn.btn-primary.btn-block(href='/symptoms') Report Symptoms
+	else
+		h1(style='text-align:center') What would you like to do today?
+		h2(style='text-align:center') I want to...
+		div.center-block(style='width:400px;margin-top:90px !important')
+			p
+				a.button.btn.btn-primary.btn-block(href='/view_patient_records') View Patient Records
+			p
+				a.button.btn.btn-primary.btn-block(href='/fill_prescription') Fill Prescription
+			p
+				a.button.btn.btn-primary.btn-block(href='/view_symptoms') See Reported Symptoms
 
