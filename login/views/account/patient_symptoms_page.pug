@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  .page-header.center-block
+    a.button.btn.btn-primary(href='/',style='margin-right:10px') Back to Home
+    a.button.btn.btn-primary(href='/view_symptoms') View Another Patient's Symptoms
+    .patient_symptoms
+      h3 Symptoms for #{patient_symptoms[0].name}
+
+  .patient_symptoms
+    h4 #{patient_symptoms[0].symptoms['description']}

@@ -6,7 +6,7 @@ block content
     h3 Report Symptoms
 
   form.form-horizontal(action='/account/symptoms', method='POST')
-    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='submit', name='_csrf', value=_csrf)
     .form-group
       label.col-sm-3.control-label(for='doctor') Doctor
       .col-sm-7

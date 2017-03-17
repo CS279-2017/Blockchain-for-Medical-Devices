@@ -5,6 +5,7 @@ const passport = require('passport');
 const User = require('../models/User');
 
 var patient_names = User.find({$and:[{"name":{$exists:true}},{"patient":true}]});
+var patient_symptoms = User.find({$and:[{"name":{$exists:true}},{"patient":true}]});
 
 /**
  * GET /fill_prescription
@@ -21,10 +22,11 @@ exports.getFillPrescription = (req, res) => {
  * view patient symptoms page.
  */
 exports.getViewSymptoms = (req, res) => {
+  show_symptoms = false;
   User.find({$and:[{"name":{$exists:true}},{"patient":true}]},function(err, patient_names){
     res.render('account/view_symptoms', {
       title: 'View Patient Symptoms',
-      patient_names:patient_names,
+      patient_names:patient_names
     });
   });
 };
@@ -34,7 +36,13 @@ exports.getViewSymptoms = (req, res) => {
  * symptoms information.
  */
 exports.postViewSymptoms = (req, res, next) => {
-
+  console.log(req.body.patientName);
+  User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_symptoms){
+    res.render('account/patient_symptoms_page', {
+      title: 'View Patient Symptoms',
+      patient_symptoms:patient_symptoms
+    });
+  });
 };
 
 /**
