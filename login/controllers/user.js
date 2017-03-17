@@ -4,6 +4,8 @@ const nodemailer = require('nodemailer');
 const passport = require('passport');
 const User = require('../models/User');
 
+var patient_names = User.find({$and:[{"name":{$exists:true}},{"patient":true}]});
+
 /**
  * GET /fill_prescription
  * fill prescription page.
@@ -19,9 +21,20 @@ exports.getFillPrescription = (req, res) => {
  * view patient symptoms page.
  */
 exports.getViewSymptoms = (req, res) => {
-  res.render('account/view_symptoms', {
-    title: 'View Patient Symptoms'
+  User.find({$and:[{"name":{$exists:true}},{"patient":true}]},function(err, patient_names){
+    res.render('account/view_symptoms', {
+      title: 'View Patient Symptoms',
+      patient_names:patient_names,
+    });
   });
+};
+
+/**
+ * POST /account/symptoms
+ * symptoms information.
+ */
+exports.postViewSymptoms = (req, res, next) => {
+
 };
 
 /**

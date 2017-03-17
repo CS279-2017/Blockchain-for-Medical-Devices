@@ -141,7 +141,7 @@ app.post('/account/prescription', userController.postPrescription);
 app.get('/view_symptoms', userController.getViewSymptoms);
 app.get('/fill_prescription', userController.getFillPrescription);
 app.get('/view_patient_records', userController.getViewPatientRecords);
-//app.post('/account/view_symptoms', userController.postViewSymptoms);
+app.post('/account/view_symptoms', userController.postViewSymptoms);
 //app.post('/account/fill_prescription', userController.postFillPrescription);
 //app.post('/account/view_patient_records', userController.postViewPatientRecords);
 
@@ -158,5 +158,7 @@ app.listen(app.get('port'), () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env')); 
   console.log('  Press CTRL-C to stop\n');
 });
+
+
 
 module.exports = app;

@@ -5,18 +5,16 @@ block content
     a.button.btn.btn-primary(href='/') Back to Home
     h3 View Reported Symptoms
 
-  form.form-horizontal(action='/account/symptoms', method='POST')
+  form.form-horizontal(id='dropdown', name='dropdown', action='/account/view_symptoms', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
-    .form-group
-      label.col-sm-3.control-label(for='doctor') Doctor
-      .col-sm-7
-        input.form-control(type='text', name='doctor', id='doctor', value=user.symptoms.doctor)
-    .form-group
-      label.col-sm-3.control-label(for='description') Current Illnesses
-      .col-sm-7
-        input.form-control(type='text', name='description', id='description', value=user.symptoms.description)
-    .form-group
-      .col-sm-offset-3.col-sm-4
-        button.btn.btn.btn-primary(type='submit')
-          i.fa.fa-pencil
-          | Report Your Symptoms
+    div.center-block(style='width:400px;margin-top:20px !important')
+      .dropdown
+        button.btn.btn-primary.btn-block.dropdown-toggle(type='button', data-toggle='dropdown')
+          | Select Patient    
+          span.caret
+        ul.dropdown-menu(style='text-align:center')
+          - for (var i = 0, len = patient_names.length; i < len; i++) {
+          li(style='padding:-10px;font-size:15px;width:400px;text-align:center')
+          .patient_names
+              a(class='dropdown-item', href='#', style='text-align:center') #{patient_names[i].name}
+          - }
