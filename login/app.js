@@ -142,8 +142,8 @@ app.get('/view_symptoms', userController.getViewSymptoms);
 app.get('/fill_prescription', userController.getFillPrescription);
 app.get('/view_patient_records', userController.getViewPatientRecords);
 app.post('/account/view_symptoms', userController.postViewSymptoms);
-//app.post('/account/fill_prescription', userController.postFillPrescription);
-//app.post('/account/view_patient_records', userController.postViewPatientRecords);
+app.post('/account/fill_prescription', userController.postFillPrescription);
+app.post('/account/view_patient_records', userController.postViewPatientRecords);
 
 
 /**

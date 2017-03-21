@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  .page-header.center-block
+    a.button.btn.btn-primary(href='/',style='margin-right:10px') Back to Home
+    a.button.btn.btn-primary(href='/view_patient_records') View Another Patient's Records
+    .patient_record
+      h3 View Record for #{patient_record[0].name}
+
+  .patient_record
+    div.center-block(style='width:400px;text-align:center;margin-top:20px !important')
+      h5 Allergies: &nbsp;&nbsp;&nbsp;#{patient_record[0].healthprofile['allergy']}
+      h5 Current Medications: &nbsp;&nbsp;&nbsp;#{patient_record[0].healthprofile['medication']}
+      h5 Current Illnesses: &nbsp;&nbsp;&nbsp;#{patient_record[0].healthprofile['illness']} 
+      br
+      h5 Patient History:
+      p #{patient_record[0].history['hives']} | #{patient_record[0].history['bowel']} | #{patient_record[0].history['thyroid']} | #{patient_record[0].history['liver']} | #{patient_record[0].history['diabetes']} | #{patient_record[0].history['stomach']} | #{patient_record[0].history['pneumonia']} | #{patient_record[0].history['acid']} | #{patient_record[0].history['tb']} | #{patient_record[0].history['anemia']} | #{patient_record[0].history['stroke']} | #{patient_record[0].history['bronchitis']} | #{patient_record[0].history['bleeding']} | #{patient_record[0].history['emphysema']} | #{patient_record[0].history['cancer']} | #{patient_record[0].history['lung']} | #{patient_record[0].history['neuro']} | #{patient_record[0].history['strep']} | #{patient_record[0].history['seizures']} | #{patient_record[0].history['sleep']} | #{patient_record[0].history['headaches']} | #{patient_record[0].history['cpap']} | #{patient_record[0].history['cataracts']} | #{patient_record[0].history['arrhythmia']} | #{patient_record[0].history['glaucoma']} | #{patient_record[0].history['heart']} | #{patient_record[0].history['arthritis']} | #{patient_record[0].history['bp']} | #{patient_record[0].history['spine']} | #{patient_record[0].history['cholesterol']} | #{patient_record[0].history['osteoporosis']} | #{patient_record[0].history['hepatitis']} | #{patient_record[0].history['depression']} | #{patient_record[0].history['hiv']} | #{patient_record[0].history['anxiety']} | #{patient_record[0].history['kidney']} | #{patient_record[0].history['psych']} | #{patient_record[0].history['gyn']} | #{patient_record[0].history['prostate']} | #{patient_record[0].history['drugs']}
+      br
+      h5 Family History:
+      p #{patient_record[0].family['asthma']} 
+      p #{patient_record[0].family['sinus']}
+      p #{patient_record[0].family['hayfever']} 
+      p #{patient_record[0].family['cysticfibrosis']}
+      p #{patient_record[0].family['emphysema']} 
+      p #{patient_record[0].family['thyroid']}
+      p #{patient_record[0].family['heart']}
+      p #{patient_record[0].family['diabetes']}
+      p #{patient_record[0].family['cancer']}

@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  .page-header.center-block
+    a.button.btn.btn-primary(href='/',style='margin-right:10px') Back to Home
+    a.button.btn.btn-primary(href='/fill_prescription') Approve Another Patient's Request
+    .patient_prescription
+      h3 Prescription Request From #{patient_prescription[0].name}
+
+  .patient_symptoms
+    div.center-block(style='width:400px;text-align:center;margin-top:20px !important')
+      h3 #{patient_prescription[0].prescription['medication']}
+      h4 #{patient_prescription[0].prescription['description']}
+      button.btn.btn.btn-primary(type='submit',style='margin-top:20px')
+        i.fa.fa-pencil
+        | Approve

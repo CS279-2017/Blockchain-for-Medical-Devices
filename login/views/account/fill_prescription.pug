@@ -3,20 +3,19 @@ extends ../layout
 block content
   .page-header.center-block
     a.button.btn.btn-primary(href='/') Back to Home
-    h3 Report Symptoms
+    h3 Fill A Prescription
 
-  form.form-horizontal(action='/account/symptoms', method='POST')
-    input(type='submit', name='_csrf', value=_csrf)
-    .form-group
-      label.col-sm-3.control-label(for='doctor') Doctor
-      .col-sm-7
-        input.form-control(type='text', name='doctor', id='doctor', value=user.symptoms.doctor)
-    .form-group
-      label.col-sm-3.control-label(for='description') Current Illnesses
-      .col-sm-7
-        input.form-control(type='text', name='description', id='description', value=user.symptoms.description)
-    .form-group
-      .col-sm-offset-3.col-sm-4
-        button.btn.btn.btn-primary(type='submit')
-          i.fa.fa-pencil
-          | Report Your Symptoms
+  form.form-horizontal(id='dropdown', name='dropdown', action='/account/fill_prescription', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    div.center-block(style='width:400px;margin-top:20px !important')
+      select.form-control(name='patientName',data-style='btn-primary')
+        option Please Select Patient Name
+        - for (var i = 0, len = patient_names.length; i < len; i++) {
+          .patient_names
+              option(value=patient_names[i].name) #{patient_names[i].name}
+        - }
+    .form-group(style='text-align:center;margin-top:20px')
+      button.btn.btn.btn-primary(type='submit')
+        i.fa.fa-pencil
+        | Look Up Symptoms
+

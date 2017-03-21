@@ -12,8 +12,25 @@ var patient_symptoms = User.find({$and:[{"name":{$exists:true}},{"patient":true}
  * fill prescription page.
  */
 exports.getFillPrescription = (req, res) => {
-  res.render('account/fill_prescription', {
-    title: 'Fill Prescription'
+  User.find({$and:[{"name":{$exists:true}},{"patient":true}]},function(err, patient_names){
+    res.render('account/fill_prescription', {
+      title: 'Fill A Prescription',
+      patient_names:patient_names
+    });
+  });
+};
+
+/**
+ * POST /account/prescription
+ * symptoms information.
+ */
+exports.postFillPrescription = (req, res, next) => {
+  console.log(req.body.patientName);
+  User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_prescription){
+    res.render('account/patient_prescription_page', {
+      title: 'Fill Patient Prescription',
+      patient_prescription:patient_prescription
+    });
   });
 };
 
@@ -22,7 +39,6 @@ exports.getFillPrescription = (req, res) => {
  * view patient symptoms page.
  */
 exports.getViewSymptoms = (req, res) => {
-  show_symptoms = false;
   User.find({$and:[{"name":{$exists:true}},{"patient":true}]},function(err, patient_names){
     res.render('account/view_symptoms', {
       title: 'View Patient Symptoms',
@@ -50,8 +66,25 @@ exports.postViewSymptoms = (req, res, next) => {
  * report page.
  */
 exports.getViewPatientRecords = (req, res) => {
-  res.render('account/view_patient_records', {
-    title: 'View Patient Records'
+  User.find({$and:[{"name":{$exists:true}},{"patient":true}]},function(err, patient_names){
+    res.render('account/view_patient_records', {
+      title: 'View Patient Records',
+      patient_names:patient_names
+    });
+  });
+};
+
+/**
+ * POST /account/symptoms
+ * symptoms information.
+ */
+exports.postViewPatientRecords = (req, res, next) => {
+  console.log(req.body.patientName);
+  User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_record){
+    res.render('account/patient_profile_page', {
+      title: 'View Patient Records',
+      patient_record:patient_record
+    });
   });
 };
 
@@ -160,15 +193,15 @@ exports.postUpdateHealthProfile = (req, res, next) => {
     user.history.prostate = req.body.prostate || '';
     user.history.drugs = req.body.drugs || '';
 
-    user.family.asthma = req.body.asthma || '';
-    user.family.sinus = req.body.sinus || '';
-    user.family.hayfever = req.body.hayfever || '';
-    user.family.cysticfibrosis = req.body.cysticfibrosis || '';
-    user.family.emphysema = req.body.emphysema || '';
-    user.family.thyroid = req.body.thyroid || '';
-    user.family.heart = req.body.heart || '';
-    user.family.diabetes = req.body.diabetes || '';
-    user.family.cancer = req.body.cancer || '';
+    user.family.asthma = req.body.asthma_family || '';
+    user.family.sinus = req.body.sinus_family || '';
+    user.family.hayfever = req.body.hayfever_family || '';
+    user.family.cysticfibrosis = req.body.cysticfibrosis_family || '';
+    user.family.emphysema = req.body.emphysema_family || '';
+    user.family.thyroid = req.body.thyroid_family || '';
+    user.family.heart = req.body.heart_family || '';
+    user.family.diabetes = req.body.diabetes_family || '';
+    user.family.cancer = req.body.cancer_family || '';
     //add family and history stuff here
     user.save((err) => {
       if (err) {
