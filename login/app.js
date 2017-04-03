@@ -145,6 +145,8 @@ app.post('/account/view_symptoms', userController.postViewSymptoms);
 app.post('/account/fill_prescription', userController.postFillPrescription);
 app.post('/account/view_patient_records', userController.postViewPatientRecords);
 
+app.post('/account/patient_prescription_page', userController.postPastPrescriptions);
+
 
 /**
  * Error Handler.

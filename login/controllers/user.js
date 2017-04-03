@@ -4,6 +4,8 @@ const nodemailer = require('nodemailer');
 const passport = require('passport');
 const User = require('../models/User');
 
+const Prescription = require('../models/PrescriptionHistory')
+
 var patient_names = User.find({$and:[{"name":{$exists:true}},{"patient":true}]});
 var patient_symptoms = User.find({$and:[{"name":{$exists:true}},{"patient":true}]});
 
@@ -25,12 +27,31 @@ exports.getFillPrescription = (req, res) => {
  * symptoms information.
  */
 exports.postFillPrescription = (req, res, next) => {
-  console.log(req.body.patientName);
   User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_prescription){
-    res.render('account/patient_prescription_page', {
-      title: 'Fill Patient Prescription',
-      patient_prescription:patient_prescription
-    });
+    	Prescription.find({"userId":patient_prescription[0].id},function(err,past_prescription){
+  		res.render('account/patient_prescription_page', {
+		    title: 'Fill Patient Prescription',
+		    patient_prescription:patient_prescription,
+		    past_prescription: past_prescription
+    	});
+  	});
+  });
+};
+
+
+/**
+ * POST /account/prescription
+ * symptoms information.
+ */
+exports.postPastPrescriptions = (req, res, next) => {
+	User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_prescription){
+    	Prescription.find({$and:[{"userId":patient_prescription[0].id},{"date":req.body,patientName,function(err,past_prescription){
+  		res.render('account/past_prescription', {
+		    title: 'Fill Patient Prescription',
+		    patient_prescription:patient_prescription,
+		    past_prescription: past_prescription
+    	});
+  	});
   });
 };
 
@@ -232,6 +253,27 @@ exports.getPrescription = (req, res) => {
  * requestion prescription information.
  */
 exports.postPrescription = (req, res, next) => {
+
+  console.log(req.user.id);
+  const prescription = new Prescription({
+    userId: req.user.id,
+    date: Date.now(),
+  	doctor: req.body.doctor,
+  	medication: req.body.medication,
+  	description: req.body.description
+  });
+
+  console.log(prescription.userId.toString());
+  console.log(prescription.date.toString());
+  console.log(prescription.doctor.toString());
+  console.log(prescription.medication.toString());
+  console.log(prescription.description.toString());
+
+  prescription.save(function(err,prescription){
+  		if(err) { return console.error(err); }
+  		console.log("success");
+  });
+
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
     user.prescription.doctor = req.body.doctor || '';
