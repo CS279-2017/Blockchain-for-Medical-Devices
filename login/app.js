@@ -146,6 +146,8 @@ app.post('/account/fill_prescription', userController.postFillPrescription);
 app.post('/account/view_patient_records', userController.postViewPatientRecords);
 
 app.post('/account/patient_prescription_page', userController.postPastPrescriptions);
+app.post('/account/patient_symptoms_page', userController.postPastSymptoms);
+app.post('/account/patient_profile_page', userController.postPastRecord);
 
 
 /**

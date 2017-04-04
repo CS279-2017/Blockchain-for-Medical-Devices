@@ -4,7 +4,9 @@ const nodemailer = require('nodemailer');
 const passport = require('passport');
 const User = require('../models/User');
 
-const Prescription = require('../models/PrescriptionHistory')
+const Prescription = require('../models/PrescriptionHistory');
+const Symptom = require('../models/SymptomHistory');
+const Record = require('../models/RecordsHistory');
 
 var patient_names = User.find({$and:[{"name":{$exists:true}},{"patient":true}]});
 var patient_symptoms = User.find({$and:[{"name":{$exists:true}},{"patient":true}]});
@@ -43,15 +45,32 @@ exports.postFillPrescription = (req, res, next) => {
  * POST /account/prescription
  * symptoms information.
  */
+
 exports.postPastPrescriptions = (req, res, next) => {
 	User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_prescription){
-    	Prescription.find({$and:[{"userId":patient_prescription[0].id},{"date":req.body,patientName,function(err,past_prescription){
-  		res.render('account/past_prescription', {
-		    title: 'Fill Patient Prescription',
-		    patient_prescription:patient_prescription,
-		    past_prescription: past_prescription
-    	});
-  	});
+    	Prescription.find({$and:[{"userId":patient_prescription[0].id},{"date":req.body.date}]}, function(err,past_prescription){
+    		res.render('account/past_prescription', {
+  		    title: 'Past Patient Prescription',
+  		    patient_prescription:patient_prescription,
+  		    past_prescription: past_prescription
+      	});
+  	  });
+  });
+};
+
+/**
+ * POST /account/prescription
+ * symptoms information.
+ */
+exports.postPastSymptoms = (req, res, next) => {
+  User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_symptoms){
+      Symptom.find({$and:[{"userId":patient_symptoms[0].id},{"date":req.body.date}]}, function(err,past_symptoms){
+      res.render('account/past_symptoms', {
+        title: 'Past Patient Symptoms',
+        patient_symptoms:patient_symptoms,
+        past_symptoms: past_symptoms
+      });
+    });
   });
 };
 
@@ -62,7 +81,7 @@ exports.postPastPrescriptions = (req, res, next) => {
 exports.getViewSymptoms = (req, res) => {
   User.find({$and:[{"name":{$exists:true}},{"patient":true}]},function(err, patient_names){
     res.render('account/view_symptoms', {
-      title: 'View Patient Symptoms',
+      title: 'View Symptoms',
       patient_names:patient_names
     });
   });
@@ -75,9 +94,12 @@ exports.getViewSymptoms = (req, res) => {
 exports.postViewSymptoms = (req, res, next) => {
   console.log(req.body.patientName);
   User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_symptoms){
-    res.render('account/patient_symptoms_page', {
-      title: 'View Patient Symptoms',
-      patient_symptoms:patient_symptoms
+      Symptom.find({"userId":patient_symptoms[0].id},function(err,past_symptoms){
+      res.render('account/patient_symptoms_page', {
+        title: 'See Patient Symptoms',
+        patient_symptoms:patient_symptoms,
+        past_symptoms: past_symptoms
+      });
     });
   });
 };
@@ -100,11 +122,29 @@ exports.getViewPatientRecords = (req, res) => {
  * symptoms information.
  */
 exports.postViewPatientRecords = (req, res, next) => {
-  console.log(req.body.patientName);
   User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_record){
-    res.render('account/patient_profile_page', {
-      title: 'View Patient Records',
-      patient_record:patient_record
+      Record.find({"userId":patient_record[0].id},function(err,past_record){
+      res.render('account/patient_profile_page', {
+        title: 'See Patient Record',
+        patient_record:patient_record,
+        past_record: past_record
+      });
+    });
+  });
+};
+
+/**
+ * POST /account/prescription
+ * symptoms information.
+ */
+exports.postPastRecord = (req, res, next) => {
+  User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_record){
+      Record.find({$and:[{"userId":patient_record[0].id},{"date":req.body.date}]}, function(err,past_record){
+      res.render('account/past_record', {
+        title: 'Past Patient Record',
+        patient_record:patient_record,
+        past_record: past_record
+      });
     });
   });
 };
@@ -134,6 +174,19 @@ exports.getSymptoms = (req, res) => {
  * symptoms information.
  */
 exports.postSymptoms = (req, res, next) => {
+
+  const symptom = new Symptom({
+    userId: req.user.id,
+    date: Date.now(),
+    doctor: req.body.doctor,
+    description: req.body.description
+  });
+
+  symptom.save(function(err,symptom){
+      if(err) { return console.error(err); }
+      console.log("success");
+  });
+
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
     user.symptoms.doctor = req.body.doctor || '';
@@ -167,6 +220,77 @@ exports.getHealthProfile = (req, res) => {
  * Update healthprofile information.
  */
 exports.postUpdateHealthProfile = (req, res, next) => {
+
+  const record = new Record({
+    userId: req.user.id,
+    date: Date.now(),
+    healthprofile: {
+      allergy : req.body.allergy || '',
+      medication : req.body.medication || '',
+      illness : req.body.illness || ''
+    },
+    
+    history: {
+      hives : req.body.hives || '', 
+      bowel : req.body.bowel || '',
+      thyroid : req.body.thyroid || '', 
+      liver : req.body.liver || '',
+      diabetes : req.body.diabetes || '', 
+      stomach : req.body.stomach || '',
+      pneumonia : req.body.pneumonia || '', 
+      acid : req.body.acid || '',
+      tb : req.body.tb || '', 
+      anemia : req.body.anemia || '',
+      stroke : req.body.stroke || '',
+      bronchitis : req.body.bronchitis || '', 
+      bleeding : req.body.bleeding || '',
+      emphysema : req.body.emphysema || '', 
+      cancer : req.body.cancer || '',
+      lung : req.body.lung || '', 
+      neuro : req.body.neuro || '',
+      strep : req.body.strep || '', 
+      seizures : req.body.seizures || '',
+      sleep : req.body.sleep || '', 
+      headaches : req.body.headaches || '',
+      cpap : req.body.cpap || '', 
+      cataracts : req.body.cataracts || '',
+      arrhythmia : req.body.arrhythmia || '', 
+      glaucoma : req.body.glaucoma || '',
+      heart : req.body.heart || '', 
+      arthritis : req.body.arthritis || '',
+      bp : req.body.bp || '', 
+      spine : req.body.spine || '',
+      cholesterol : req.body.cholesterol || '', 
+      osteoporosis : req.body.osteoporosis || '',
+      hepatitis : req.body.hepatitis || '', 
+      depression : req.body.depression || '',
+      hiv : req.body.hiv || '', 
+      anxiety : req.body.anxiety || '',
+      kidney : req.body.kidney || '', 
+      psych : req.body.psych || '',
+      gyn : req.body.gyn || '', 
+      prostate : req.body.prostate || '',
+      drugs : req.body.drugs || ''
+    },
+
+    family: {
+      asthma : req.body.asthma_family || '',
+      sinus : req.body.sinus_family || '',
+      hayfever : req.body.hayfever_family || '',
+      cysticfibrosis : req.body.cysticfibrosis_family || '',
+      emphysema : req.body.emphysema_family || '',
+      thyroid : req.body.thyroid_family || '',
+      heart : req.body.heart_family || '',
+      diabetes : req.body.diabetes_family || '',
+      cancer : req.body.cancer_family || ''
+    }
+  });
+
+  record.save(function(err,record){
+      if(err) { return console.error(err); }
+      console.log("success");
+  });
+
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
     user.healthprofile.allergy = req.body.allergy || '';
@@ -262,12 +386,6 @@ exports.postPrescription = (req, res, next) => {
   	medication: req.body.medication,
   	description: req.body.description
   });
-
-  console.log(prescription.userId.toString());
-  console.log(prescription.date.toString());
-  console.log(prescription.doctor.toString());
-  console.log(prescription.medication.toString());
-  console.log(prescription.description.toString());
 
   prescription.save(function(err,prescription){
   		if(err) { return console.error(err); }

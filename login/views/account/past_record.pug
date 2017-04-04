@@ -1,0 +1,111 @@
+.patient_record
+  h3 Medical Record for #{patient_record[0].name}
+.past_record
+  h3 Time Updated: #{past_record[0].date}
+  br
+  h4 Brief Health Profile:
+  h5 Allergies: &nbsp;#{past_record[0].healthprofile['allergy']}
+  h5 Current Medications: &nbsp;#{past_record[0].healthprofile['medication']}
+  h5 Current Illnesses: &nbsp;#{past_record[0].healthprofile['illness']}
+  br
+  h4 Patient History:
+  if (past_record[0].history['hives']).length != 0
+    h5 -Hives
+  if (past_record[0].history['bowel']).length != 0
+    h5 -Bowel Problems
+  if (past_record[0].history['thyroid']).length != 0
+    h5 -Thyroid Problems
+  if (past_record[0].history['liver']).length != 0
+    h5 -Liver Problems
+  if (past_record[0].history['diabetes']).length != 0
+    h5 -Diabetes
+  if (past_record[0].history['stomach']).length != 0
+    h5 -Stomach Problems
+  if (past_record[0].history['pneumonia']).length != 0
+    h5 -Pneumonia
+  if (past_record[0].history['acid']).length != 0
+    h5 -Acid Reflux
+  if (past_record[0].history['tb']).length != 0
+    h5 -Tuberculosis
+  if (past_record[0].history['anemia']).length != 0
+    h5 -Anemia
+  if (past_record[0].history['stroke']).length != 0
+    h5 -Stroke
+  if (past_record[0].history['bronchitis']).length != 0
+    h5 -Bronchitis
+  if (past_record[0].history['bleeding']).length != 0
+    h5 -Bleeding/Clotting Issues
+  if (past_record[0].history['emphysema']).length != 0
+    h5 -Emphysema
+  if (past_record[0].history['cancer']).length != 0
+    h5 -Cancer
+  if (past_record[0].history['lung']).length != 0
+    h5 -Lung Disease
+  if (past_record[0].history['neuro']).length != 0
+    h5 -Neurological Problems
+  if (past_record[0].history['strep']).length != 0
+    h5 -Strep Throat
+  if (past_record[0].history['seizures']).length != 0
+    h5 -Seizures
+  if (past_record[0].history['sleep']).length != 0
+    h5 -Sleep Apnea
+  if (past_record[0].history['headaches']).length != 0
+    h5 -Migranes/Headaches
+  if (past_record[0].history['cpap']).length != 0
+    h5 -CPAP
+  if (past_record[0].history['cataracts']).length != 0
+    h5 -Cataracts
+  if (past_record[0].history['arrhythmia']).length != 0
+    h5 -Heart Arrhythmia
+  if (past_record[0].history['glaucoma']).length != 0
+    h5 -Glaucoma
+  if (past_record[0].history['heart']).length != 0
+    h5 -Heart Disease
+  if (past_record[0].history['arthritis']).length != 0
+    h5 -Arthritis
+  if (past_record[0].history['bp']).length != 0
+    h5 -High Blood Pressure
+  if (past_record[0].history['spine']).length != 0
+    h5 -Spine Problems
+  if (past_record[0].history['cholesterol']).length != 0
+    h5 -High Cholesterol
+  if (past_record[0].history['osteoporosis']).length != 0
+    h5 -Osteoporosis
+  if (past_record[0].history['hepatitis']).length != 0
+    h5 -Hepatitis
+  if (past_record[0].history['depression']).length != 0
+    h5 -Depression
+  if (past_record[0].history['hiv']).length != 0
+    h5 -HIV/AIDS
+  if (past_record[0].history['anxiety']).length != 0
+    h5 -Anxiety
+  if (past_record[0].history['kidney']).length != 0
+    h5 -Kidney Problems
+  if (past_record[0].history['psych']).length != 0
+    h5 -Psychological Problems
+  if (past_record[0].history['gyn']).length != 0
+    h5 -Gynecological Issues
+  if (past_record[0].history['prostate']).length != 0
+    h5 -Prostate Issues
+  if (past_record[0].history['drugs']).length != 0
+    h5 -Drug Abuse
+  br
+  h4 Family History:
+  if (past_record[0].family['asthma']).length != 0
+    h5 Asthma: #{past_record[0].family['asthma']}
+  if (past_record[0].family['sinus']).length != 0
+    h5 Sinus: #{past_record[0].family['sinus']}
+  if (past_record[0].family['hayfever']).length != 0 
+    h5 Hay Fever: #{past_record[0].family['hayfever']}
+  if (past_record[0].family['cysticfibrosis']).length != 0
+    h5 Cystic Fibrosis: #{past_record[0].family['cysticfibrosis']}
+  if (past_record[0].family['emphysema']).length != 0 
+    h5 Emphysema: #{past_record[0].family['emphysema']}
+  if (past_record[0].family['thyroid']).length != 0
+    h5 Thyroid Problems: #{past_record[0].family['thyroid']}
+  if (past_record[0].family['heart']).length != 0
+    h5 Heart Disease: #{past_record[0].family['heart']}
+  if (past_record[0].family['diabetes']).length != 0
+    h5 Diabetes: #{past_record[0].family['diabetes']}
+  if (past_record[0].family['cancer']).length != 0
+    h5 Cancer: #{past_record[0].family['cancer']}

@@ -7,6 +7,41 @@ block content
     .patient_symptoms
       h3 Symptoms for #{patient_symptoms[0].name}
 
+  -function prettyDate(dateString){
+    -var date = new Date(dateString);
+    -var d = date.getDate();
+    -var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+    -var m = monthNames[date.getMonth()];
+    -var y = date.getFullYear();
+    -return d+' '+m+' '+y;
+  -}
+
+  div.center-block(style='width:400px;text-align:center;margin-top:20px !important')
+    h3 See Previous Reported Symptoms
+    form.form-horizontal(id='dropdown', target='_blank',name='dropdown', action='/account/patient_symptoms_page', method='POST')
+      input(type='hidden', name='_csrf', value=_csrf)
+      input(type="hidden" name="patientName" value=patient_symptoms[0].name)
+      div.center-block(style='width:400px;margin-top:20px !important')
+        select.form-control(name='date',data-style='btn-primary')
+          option Please Select Date
+          - for (var i = 0, len = past_symptoms.length; i < len; i++) {
+            .past_symptoms
+                option(value=past_symptoms[i].date) #{prettyDate(past_symptoms[0].date)}
+          - }
+      .form-group(style='text-align:center;margin-top:20px')
+        button.btn.btn.btn-primary(formtarget='_blank',type='submit')
+          i.fa.fa-pencil
+          | See Symptoms
+
+  br
+  br
+  br
   .patient_symptoms
     div.center-block(style='width:400px;text-align:center;margin-top:20px !important')
-      h4 #{patient_symptoms[0].symptoms['description']}
+      div(style='width:100px;text-align:center;color:#4286f4')
+      h3 Most Recent Symptoms
+      .patient_symptoms
+      h5 Description: &nbsp;#{patient_symptoms[0].symptoms['description']}
+
+    
+
