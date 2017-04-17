@@ -21,6 +21,7 @@ block content
     form.form-horizontal(id='dropdown', target='_blank',name='dropdown', action='/account/patient_prescription_page', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       input(type="hidden" name="patientName" value=patient_prescription[0].name)
+      input(type="hidden" name="btype" value="past")
       div.center-block(style='width:400px;margin-top:20px !important')
         select.form-control(name='date',data-style='btn-primary')
           option Please Select Date
@@ -38,13 +39,14 @@ block content
   br
   .patient_prescription
     div.center-block(style='width:400px;text-align:center;margin-top:20px !important')
-      div(style='width:100px;text-align:center;color:#4286f4')
-      h3 Most Recent Request
-      h5 Medication Requested: #{patient_prescription[0].prescription['medication']}
-      h5 Description: #{patient_prescription[0].prescription['description']}
-      button.btn.btn.btn-primary(type='submit',style='margin-top:20px')
-        i.fa.fa-pencil
-        | Approve
+      form.form-horizontal(id='approve', name='approve', action='/account/fill_prescription', method='POST')
+        input(type="hidden" name="btype" value="approve")
+        h3 Most Recent Request
+        h5 Medication Requested: #{patient_prescription[0].prescription['medication']}
+        h5 Description: #{patient_prescription[0].prescription['description']}
+        button.btn.btn.btn-primary(type='submit',style='margin-top:20px')
+          i.fa.fa-pencil
+          | Approve
 
     
 

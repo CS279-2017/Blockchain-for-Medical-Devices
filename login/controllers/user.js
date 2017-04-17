@@ -29,15 +29,25 @@ exports.getFillPrescription = (req, res) => {
  * symptoms information.
  */
 exports.postFillPrescription = (req, res, next) => {
-  User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_prescription){
-    	Prescription.find({"userId":patient_prescription[0].id},function(err,past_prescription){
-  		res.render('account/patient_prescription_page', {
-		    title: 'Fill Patient Prescription',
-		    patient_prescription:patient_prescription,
-		    past_prescription: past_prescription
-    	});
-  	});
+  if(req.body.btype == "approve"){
+    req.flash('success', { msg: 'The prescription has been sent to the nearest pharmacy.' });
+    User.find({$and:[{"name":{$exists:true}},{"patient":true}]},function(err, patient_names){
+    res.render('account/fill_prescription', {
+      title: 'Fill A Prescription',
+      patient_names:patient_names
+    });
   });
+  } else {
+  User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_prescription){
+    Prescription.find({"userId":patient_prescription[0].id},function(err,past_prescription){
+      res.render('account/patient_prescription_page', {
+        title: 'Fill Patient Prescription',
+        patient_prescription:patient_prescription,
+        past_prescription: past_prescription
+      });
+    });
+  });
+}
 };
 
 
@@ -47,15 +57,15 @@ exports.postFillPrescription = (req, res, next) => {
  */
 
 exports.postPastPrescriptions = (req, res, next) => {
-	User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_prescription){
-    	Prescription.find({$and:[{"userId":patient_prescription[0].id},{"date":req.body.date}]}, function(err,past_prescription){
-    		res.render('account/past_prescription', {
-  		    title: 'Past Patient Prescription',
-  		    patient_prescription:patient_prescription,
-  		    past_prescription: past_prescription
-      	});
-  	  });
-  });
+    User.find({$and:[{"name":req.body.patientName},{"patient":true}]},function(err,patient_prescription){
+      Prescription.find({$and:[{"userId":patient_prescription[0].id},{"date":req.body.date}]}, function(err,past_prescription){
+        res.render('account/past_prescription', {
+          title: 'Past Patient Prescription',
+          patient_prescription:patient_prescription,
+          past_prescription: past_prescription
+        });
+      });
+    });
 };
 
 /**
@@ -377,7 +387,6 @@ exports.getPrescription = (req, res) => {
  * requestion prescription information.
  */
 exports.postPrescription = (req, res, next) => {
-
   console.log(req.user.id);
   const prescription = new Prescription({
     userId: req.user.id,
